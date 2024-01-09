@@ -25,6 +25,8 @@ export class HeaderComponent
 {
   public config: any = {};
   userImg: string;
+  userFullName: string;
+  
   homePage: string;
   isNavbarCollapsed = true;
   flagvalue;
@@ -102,7 +104,7 @@ export class HeaderComponent
   ngOnInit() {
     this.config = this.configService.configData;
     this.userImg = this.authService.currentUserValue.img;
-
+    this.userFullName = this.authService.currentUserValue.nomope + ' ' + this.authService.currentUserValue.patope;
     this.homePage = "dashboard/dashboard1";
 
     this.langStoreValue = localStorage.getItem("lang");

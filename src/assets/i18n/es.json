@@ -11,8 +11,11 @@
     "MAIN": {
       "TEXT": "Principal"
     },
+    "BOLETA": {
+      "TEXT": "Boletas"
+    },
     "DASHBOARD": {
-      "TEXT": "Casa",
+      "TEXT": "Inicio",
       "LIST": {
         "DASHBOARD1": "Tablero 1",
         "DASHBOARD2": "Tablero 2",
