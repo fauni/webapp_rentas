@@ -7,20 +7,20 @@
     <div class="col-sm-6 auth-form-section">
       <div class="form-section">
         <div class="auth-wrapper">
-          <h2 class="welcome-msg"> Welcome to Spire </h2>
-          <p class="auth-signup-text text-muted">Need an account?<a routerLink="/authentication/signup"
+          <h2 class="welcome-msg"> Bienvenido </h2>
+          <!-- <p class="auth-signup-text text-muted">Need an account?<a routerLink="/authentication/signup"
               class="sign-up-link">Sign Up
-            </a></p>
-          <h2 class="login-title">Sign in</h2>
+            </a></p> -->
+          <h2 class="login-title">Login</h2>
           <form class="validate-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Username</mat-label>
+                  <mat-label>Usuario</mat-label>
                   <input matInput formControlName="username" />
                   <mat-icon matSuffix class="face-icon">face</mat-icon>
                   <mat-error *ngIf="authForm.get('username').hasError('required')">
-                    Username is required
+                    Nombre de usuario requerido
                   </mat-error>
                 </mat-form-field>
               </div>

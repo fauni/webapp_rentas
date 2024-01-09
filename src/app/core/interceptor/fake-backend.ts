@@ -20,6 +20,17 @@ const users: User[] = [
     firstName: "Sarah",
     lastName: "Smith",
     token: "admin-token",
+    codope:"",
+    patope:"",
+    matope:"",
+    nomope:"",
+    estope:"",
+    actope:"",
+    faltope:"",
+    fbajope:"",
+    pasope:"",
+    regional:"",
+    repart:"",
   },
 ];
 

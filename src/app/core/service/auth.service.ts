@@ -25,9 +25,9 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http
-      .post<any>(`${environment.apiUrl}/authenticate`, {
-        username,
-        password,
+      .post<any>(`${environment.apiUrl2}operador/login`, {
+        "usuario": username,
+        "clave": password,
       })
       .pipe(
         map((user) => {
@@ -35,6 +35,7 @@ export class AuthService {
 
           localStorage.setItem("currentUser", JSON.stringify(user));
           this.currentUserSubject.next(user);
+          console.log('Json', JSON.stringify(user))
           return user;
         })
       );

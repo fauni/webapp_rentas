@@ -28,8 +28,10 @@ export class SigninComponent
 
   ngOnInit() {
     this.authForm = this.formBuilder.group({
-      username: ["admin@software.com", Validators.required],
-      password: ["admin@123", Validators.required],
+      // username: ["admin@software.com", Validators.required],
+      // password: ["admin@123", Validators.required],
+      username: ["", Validators.required],
+      password: ["", Validators.required],
     });
   }
   get f() {
@@ -40,7 +42,7 @@ export class SigninComponent
     this.loading = true;
     this.error = "";
     if (this.authForm.invalid) {
-      this.error = "Username and Password not valid !";
+      this.error = "El nombre de usuario y el password no son validos!";
       return;
     } else {
       this.subs.sink = this.authService
@@ -48,13 +50,13 @@ export class SigninComponent
         .subscribe(
           (res) => {
             if (res) {
-              const token = this.authService.currentUserValue.token;
+              const token = this.authService.currentUserValue.pasope;
               console.log(token);
               if (token) {
                 this.router.navigate(["/dashboard/dashboard1"]);
               }
             } else {
-              this.error = "Invalid Login";
+              this.error = "Datos invalidos";
             }
           },
           (error) => {
