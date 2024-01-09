@@ -53,7 +53,7 @@ export class SigninComponent
               const token = this.authService.currentUserValue.pasope;
               console.log(token);
               if (token) {
-                this.router.navigate(["/dashboard/dashboard1"]);
+                this.router.navigate(["/main/home"]);
               }
             } else {
               this.error = "Datos invalidos";

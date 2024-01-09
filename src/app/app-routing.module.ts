@@ -12,6 +12,16 @@ const routes: Routes = [
     children: [
       { path: "", redirectTo: "/authentication/signin", pathMatch: "full" },
       {
+        path: "main",
+        loadChildren: () =>
+          import("./home/home.module").then((m) => m.HomeModule),
+      },
+      {
+        path: "boleta",
+        loadChildren: () =>
+          import("./boleta-pages/boleta-pages.module").then((m) => m.BoletaPagesModule),
+      },
+      {
         path: "dashboard",
         loadChildren: () =>
           import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
