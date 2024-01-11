@@ -12,18 +12,155 @@
               <h2><strong>Boleta</strong> Page</h2>
             </div>
             <div class="body">
-              <form action="">
-                <input type="text" name="matricula" id="matricula">
-                <select name="mes" id="mes">
-                  <option value="0" selected disabled>elija un mes</option>
+              <form action="" class="validate-form" [formGroup]="busquedaForm" (ngSubmit)="onBuscar()">
+                <mat-form-field class="example" appearance="fill">
+                  <mat-label>Matricula</mat-label>
+                  <input matInput type="text" formControlName="matricula" name="matricula" id="matricula"/>
+                  <mat-error *ngIf="busquedaForm.get('matricula').hasError('required')">
+                    Debe ingresar la matricula
+                  </mat-error>
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field class="example">
+                  <mat-label>Mes</mat-label>
+                  <select matNativeControl required name="mes" id="mes" formControlName="mes">
+                    <option value="" selected disabled>elija un mes</option>
                   <option *ngFor="let item of meses" value="{{item.cod_mes}}">{{item.descripcion}}</option>
-                </select>
-                <select name="gestion" id="gestion">
-                  <option value="0" selected disabled>elija una gestion</option>
-                  <option *ngFor="let item of gestiones" value="{{item}}">{{item}}</option>
-                </select>
+                  </select>
+                  <mat-error *ngIf="busquedaForm.get('mes').hasError('required')">
+                    Debe elegir un mes
+                  </mat-error>
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field class="example">
+                  <mat-label>Gestión</mat-label>
+                  <select matNativeControl required name="gestion" id="gestion" formControlName="gestion">
+                    <option value="" selected disabled>elija una gestión</option>
+                    <option *ngFor="let item of gestiones" value="{{item}}">{{item}}</option>
+                  </select>
+                  <mat-error *ngIf="busquedaForm.get('gestion').hasError('required')">
+                    Debe elegir una gestión
+                  </mat-error>
+                </mat-form-field>
+                &nbsp;
+                <button class="btn-space" mat-raised-button color="primary" mat-raised-button
+                class="auth-form-btn" type="submit"  
+                    >Buscar</button>
               </form>
               <!-- Add content here -->
+
+              <table *ngIf="detalle" align="center" >
+                <tr style="text-align: center;">
+                  <td>{{detalle.tempo.nboleta_tmp1}}</td>
+                  <td>&nbsp;</td>
+                  <td>{{detalle.tempo.mesproc_tmp1+" "+detalle.tempo.gestion_tmp1 }}</td>
+                </tr>
+                <tr style="text-align: center; ">
+                  <th>nro. boleta</th>
+                  <th></th>
+                  <th>fech. venc. boleta</th>
+                </tr>  
+                <tr style="text-align: center; ">
+                  <td>{{detalle.matricula}}</td>
+                  <td>{{detalle.paterno+' '+detalle.prefijo+' '+detalle.apcasada+' '+detalle.materno+' '+detalle.nombre+' '+detalle.nombre2}}</td>
+                  <td>{{detalle.tipoRenta.detalle}}</td>
+                </tr>
+                <tr style="text-align: center; ">
+                  <th>MATRICULA</th>
+                  <th>APELLIDOS Y NOMBRES</th>
+                  <th>TIPO DE RENTISTA</th>
+                </tr> 
+                <tr style="text-align: center; ">
+                  <td>{{detalle.ci1}}</td>
+                  <td>{{'******'}}</td>
+                  <td>{{detalle.fingre}}</td>
+                </tr>
+                <tr style="text-align: center;">
+                  <th>CARNET DE IDENTIDAD</th>
+                  <th>REGIMEN</th>
+                  <th>FECHA DE INGRESO</th>
+                </tr>   
+                <tr style="text-align: center; ">
+                  <td>{{detalle.regionalDetalle.descripcion}}</td>
+                  <td>{{detalle.cuenta+"*****"}}</td>
+                  <td>{{detalle.fuerzaDetalle.des_fza}}</td>
+                </tr>
+                <tr style="text-align: center;">
+                  <th>REGIONAL</th>
+                  <th>NRO. CUENTA</th>
+                  <th>FUERZA</th>
+                </tr> 
+                <tr style="text-align: center; ">
+                  <th >INGRESOS</th>
+                  <th>&nbsp;</th>
+                  <th >EGRESOS</th>
+                  </tr>
+                  <tr style="text-align: center; ">
+                    <td >
+                      <table>
+                        <tr>
+                          <th>
+                            CODIGO
+                          </th>
+                          <th>
+                            DETALLE
+                          </th>
+                          <th>
+                            MONTO
+                          </th>
+                        </tr>
+                        
+                        <tr *ngFor="let ing of detalle.ingresos">
+                          <td>{{ing.codigo}}</td>
+                          <td>{{ing.detalle}}</td>
+                          <td>{{ing.monto}}</td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td >
+                      <table>
+                        <tr>
+                          <th>
+                            CODIGO
+                          </th>
+                          <th>
+                            DETALLE
+                          </th>
+                          <th>
+                            MONTO
+                          </th>
+                        </tr>
+                        
+                        <tr *ngFor="let eg of detalle.egresos">
+                          <td>{{eg.codigo}}</td>
+                          <td>{{eg.detalle}}</td>
+                          <td>{{eg.monto}}</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>   
+                  
+              </table>
+              <table *ngIf="detalle">
+                <tr>
+                  <th>TOTAL INGRESOS (Bs):</th>
+                  <td>#######</td>
+                </tr>
+                <tr>
+                  <th>TOTAL DESCUENTOS (Bs)</th>
+                  <td>#####</td>
+                </tr>
+                <tr>
+                  <th>LIQUIDO PAGABLE (Bs)</th>
+                  <td>######</td>
+                </tr>
+                <tr>
+                  <td>FECHA DE EMISION: {{fechaHoy}}</td>
+                  <td>&nbsp;</td>
+                  <td>USUARIO: {{codusuario }}</td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>

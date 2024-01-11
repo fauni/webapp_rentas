@@ -44,4 +44,14 @@ export class BoletasService {
       })
     );
   }
+  detalleRenta(matricula: string,mes: string, gestion:string) {
+    return this.http
+    .get<any>(`${environment.apiUrl2}rentas/compuesto/${matricula}/${mes}/${gestion}`)
+    .pipe(
+      map((detallle) => {
+        console.log('Json', JSON.stringify(detallle))
+        return detallle;
+      })
+    );
+  }
 }
